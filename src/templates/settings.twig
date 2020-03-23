@@ -1,0 +1,62 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Bitbucket Pipeline Deployment plugin for Craft CMS 3.x
+ *
+ * Bitbucket Pipeline Deployment Settings.twig
+ *
+ * @author    Colin Tracy
+ * @copyright Copyright (c) 2020 Colin Tracy
+ * @link      https://www.colintracy.com
+ * @package   BitbucketPipelineDeployment
+ * @since     0.1.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("aisleng\\bitbucketpipelinedeployment\\assetbundles\\bitbucketpipelinedeployment\\BitbucketPipelineDeploymentAsset") %}
+
+{{ forms.textField({
+        label: 'Bitbucket User Name & Password',
+        instructions: 'Enter the user and password that has access to the Bitbucket pipeline.',
+        id: 'bitbucketUser',
+        name: 'bitbucketUser',
+        value: settings['bitbucketUser'],
+        required: true
+    })
+}}
+
+{{ forms.passwordField({
+        id: 'bitbucketPassword',
+        name: 'bitbucketPassword',
+        value: settings['bitbucketPassword'],
+        required: true
+    })
+}}
+
+{{ forms.editableTable({
+    id: 'buildHooks',
+    name: 'buildHooks',
+    addRowLabel: 'Add a build pipeline',
+    cols: {
+        siteName: {
+            heading: 'Site Name',
+            type: 'singleline'
+        },
+        branch: {
+            heading: 'Branch',
+            type: 'singleline'
+        },
+        workspaceSlug: {
+            heading: 'Workspace Slug',
+            type: 'singleline'
+        },
+        repoSlug: {
+            heading: 'Repository Slug',
+            type: 'singleline'
+        }
+    },
+    rows: settings['buildHooks']
+    })
+}}

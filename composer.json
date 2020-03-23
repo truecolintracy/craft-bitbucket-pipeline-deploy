@@ -1,0 +1,40 @@
+{
+    "name": "aisleng/bitbucket-pipeline-deployment",
+    "description": "Uses the Bitbucket API to run pipelines and deploy to any number of services",
+    "type": "craft-plugin",
+    "version": "0.1.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "bitbucket pipeline deployment"
+    ],
+    "support": {
+        "docs": "https://github.com/truecolintracy/bitbucket-pipeline-deployment/blob/master/README.md",
+        "issues": "https://github.com/truecolintracy/bitbucket-pipeline-deployment/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Colin Tracy",
+            "homepage": "https://www.colintracy.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "aisleng\\bitbucketpipelinedeployment\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Bitbucket Pipeline Deployment",
+        "handle": "bitbucket-pipeline-deployment",
+        "hasCpSettings": true,
+        "hasCpSection": true,
+        "changelogUrl": "https://raw.githubusercontent.com/truecolintracy/bitbucket-pipeline-deployment/master/CHANGELOG.md",
+        "class": "aisleng\\bitbucketpipelinedeployment\\BitbucketPipelineDeployment"
+    }
+}
