@@ -2,7 +2,7 @@
 
 Uses the Bitbucket API to run pipelines and deploy to any number of services
 
-![Screenshot](resources/img/bb-deploy.svg)
+![Screenshot](resources/img/bb-deploy.png)
 
 ## Requirements
 
