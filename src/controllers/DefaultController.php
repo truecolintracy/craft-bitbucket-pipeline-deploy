@@ -46,7 +46,7 @@ class DefaultController extends Controller
      *         The actions must be in 'kebab-case'
      * @access protected
      */
-    protected $allowAnonymous = ['index', 'do-something'];
+    protected $allowAnonymous = ['index'];
 
     // Public Methods
     // =========================================================================
@@ -59,20 +59,34 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $result = 'Welcome to the DefaultController actionIndex() method';
+        $ch = curl_init();
+        $bitbucketUserName = Craft::$app->plugins->getPlugin('bitbucket-pipeline-deployment')->getSettings()->bitbucketUser;
+        $bitbucketPassword = Craft::$app->plugins->getPlugin('bitbucket-pipeline-deployment')->getSettings()->bitbucketPassword;
+        $repo = CRAFT::$app->request->get('repo');
+        $workspace = CRAFT::$app->request->get('workspace');
+        $branch = CRAFT::$app->request->get('branch');
+        
+        $data = array('target' => array(
+            'ref_type' => 'branch',
+            'type' => 'pipeline_ref_target',
+            'ref_name' => $branch
+        ));
 
-        return $result;
-    }
+        curl_setopt($ch, CURLOPT_URL, 'https://api.bitbucket.org/2.0/repositories/' . $workspace . '/' . $repo . '/pipelines/');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "\n  {\n    \"target\": {\n      \"ref_type\": \"branch\", \n      \"type\": \"pipeline_ref_target\", \n      \"ref_name\": \"" . $branch . "\" \n    }\n  }");
+        curl_setopt($ch, CURLOPT_USERPWD, $bitbucketUserName . ':' . $bitbucketPassword);
 
-    /**
-     * Handle a request going to our plugin's actionDoSomething URL,
-     * e.g.: actions/bitbucket-pipeline-deployment/default/do-something
-     *
-     * @return mixed
-     */
-    public function actionDoSomething()
-    {
-        $result = 'Welcome to the DefaultController actionDoSomething() method';
+        $headers = array();
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
 
         return $result;
     }

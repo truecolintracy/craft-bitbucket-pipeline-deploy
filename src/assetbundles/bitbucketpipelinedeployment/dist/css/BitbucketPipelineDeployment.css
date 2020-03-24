@@ -9,3 +9,35 @@
  * @package   BitbucketPipelineDeployment
  * @since     0.1.0
  */
+.deploy-headline {
+  margin-top: 25px;
+}
+
+.deploy-block {
+  border-top: 1px solid gray;
+  padding: 15px 15px 0;
+}
+
+.deploy-block-first-child {
+  border-top: 1px solid transparent;
+}
+
+.deploy-btn {
+  font-size: 14px;
+  font-family: inherit;
+  color: white;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
+.deploy-prod-btn {
+  background-color: #fe346e;
+}
+
+.deploy-staging-btn {
+  background-color: #00bdaa;
+}
+
+.deploy-dev-btn {
+  background-color: #400082;
+}

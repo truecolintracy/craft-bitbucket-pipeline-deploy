@@ -30,7 +30,7 @@ class BitbucketPipelineDeploymentVariable
 {
     // Public Methods
     // =========================================================================
-
+    
     /**
      * Whatever you want to output to a Twig template can go into a Variable method.
      * You can have as many variable functions as you want.  From any Twig template,
@@ -45,12 +45,8 @@ class BitbucketPipelineDeploymentVariable
      * @param null $optional
      * @return string
      */
-    public function exampleVariable($optional = null)
+    public function buildHooks($optional = null)
     {
-        $result = "And away we go to the Twig template...";
-        if ($optional) {
-            $result = "I'm feeling optional today...";
-        }
-        return $result;
+        return Craft::$app->plugins->getPlugin('bitbucket-pipeline-deployment')->getSettings()->buildHooks;
     }
 }

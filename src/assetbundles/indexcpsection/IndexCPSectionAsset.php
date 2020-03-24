@@ -44,7 +44,7 @@ class IndexCPSectionAsset extends AssetBundle
     {
         // define the path that your publishable resources live
         $this->sourcePath = "@aisleng/bitbucketpipelinedeployment/assetbundles/indexcpsection/dist";
-
+        
         // define the dependencies
         $this->depends = [
             CpAsset::class,

@@ -30,17 +30,43 @@
 
 {# Get a URL to an image in our AssetBundle #}
 {% set iconUrl = view.getAssetManager().getPublishedUrl('@aisleng/bitbucketpipelinedeployment/assetbundles/indexcpsection/dist', true) ~ '/img/Index-icon.svg' %}
-
-{# Content that should appear in the page header#}
-{% set extraPageHeaderHtml %}
-    <div class="buttons">
-        <a href="{{ pluginCpUrl }}" class="btn submit add icon">{{ "Click Me!"|t('bitbucket-pipeline-deployment') }}</a>
-    </div>
-{% endset %}
+{% set buildHooks = craft.bitbucketPipelineDeployment.buildHooks %}
 
 {# The content of the CP Section#}
 {% set content %}
-    <h2>{{ "Index CP Section body goes here"|t('bitbucket-pipeline-deployment') }}</h2>
-    <img src="{{ iconUrl }}" height="64" width="64" />
-    <p class="textline"></p>
+    <h2>{{ "Deploy"|t('bitbucket-pipeline-deployment') }}</h2>
+    <div class="deploy-block deploy-block-first-child">
+        <h3 class="deploy-headline">Production Builds</h3>
+        <p>This will deploy your latest content to the production application.</p>
+        
+        {% for hook in buildHooks %}
+            {% if hook.branch == "production" %}
+                <button class="btn deploy-btn deploy-prod-btn" data-workspace="{{ hook.workspaceSlug }}" data-repo="{{ hook.repoSlug }}" data-branch="{{ hook.branch }}">
+                    Deploy {{ hook.siteName }}
+                </button>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="deploy-block">
+        <h3 class="deploy-headline">Staging Builds</h3>
+        <p>This will deploy your latest content to the staging application.</p>
+        {% for hook in buildHooks %}
+            {% if hook.branch == "staging" %}
+                <button class="btn deploy-btn deploy-staging-btn" data-workspace="{{ hook.workspaceSlug }}" data-repo="{{ hook.repoSlug }}" data-branch="{{ hook.branch }}">
+                    Deploy {{ hook.siteName }}
+                </button>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="deploy-block">
+        <h3 class="deploy-headline">Development Builds</h3>
+        <p>This will deploy your latest content to the development application.</p>
+        {% for hook in buildHooks %}
+            {% if hook.branch == "development" %}
+                <button class="btn deploy-btn deploy-dev-btn" data-workspace="{{ hook.workspaceSlug }}" data-repo="{{ hook.repoSlug }}" data-branch="{{ hook.branch }}">
+                    Deploy {{ hook.siteName }}
+                </button>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endset %}
