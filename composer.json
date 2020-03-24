@@ -2,7 +2,6 @@
     "name": "aisleng/bitbucket-pipeline-deployment",
     "description": "Uses the Bitbucket API to run pipelines and deploy to any number of services",
     "type": "craft-plugin",
-    "version": "0.1.0",
     "keywords": [
         "craft",
         "cms",
