@@ -2,7 +2,7 @@
 
 Uses the Bitbucket API to run pipelines and deploy to any number of services
 
-![Screenshot](resources/img/plugin-logo.png)
+![Screenshot](resources/img/bb-deploy.svg)
 
 ## Requirements
 
@@ -18,26 +18,31 @@ To install the plugin, follow these instructions.
 
 2. Then tell Composer to load the plugin:
 
-        composer require truecolintracy/bitbucket-pipeline-deployment
+        composer require aisleng/bitbucket-pipeline-deployment
 
 3. In the Control Panel, go to Settings → Plugins and click the “Install” button for Bitbucket Pipeline Deployment.
 
-## Bitbucket Pipeline Deployment Overview
-
--Insert text here-
-
-## Configuring Bitbucket Pipeline Deployment
-
--Insert text here-
-
 ## Using Bitbucket Pipeline Deployment
 
--Insert text here-
+Install the plugin through composer or the craft plugin store. 
+
+Once installed you should see the setting area.  Here you should enter the user that will run the pipelines username and password for bitbucket.
+
+Then you can enter the following:
+
+* Repository or Site Name
+* Branch Name
+* Workspace Slug
+* Repository Slug
+
+Users should now have access to deploy to your bitbucket pipelines once the content is ready.
 
 ## Bitbucket Pipeline Deployment Roadmap
 
 Some things to do, and ideas for potential features:
 
-* Release it
+* Connect directly to bitbucket and pull repos
+* User dropdown for selecting repos
+* Notify user when pipeline is finished with toast
 
 Brought to you by [Colin Tracy](https://www.colintracy.com)
